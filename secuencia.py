@@ -1,6 +1,8 @@
 from Bio import SeqIO
 from math import sin,cos
 from random import random
+from pygame import Surface, Color, display
+from pygame.sprite import Group
 
 from aminoacido import Aminoacido
 
@@ -15,10 +17,12 @@ class Secuencia:
     def __init__(self, screen, archivo ):
         self.archivo = archivo
         self.secuencia = []
-        self.camino = []
+        self.camino = Group()
         self.screen = screen
+
         self.limites = screen.get_size()
-        self.limite_aminoacidos = 800
+        self.limite_aminoacidos = 500
+
         self.leer_archivo()
         self.crear_camino()
         
@@ -50,18 +54,25 @@ class Secuencia:
 
         for aminoacido in self.secuencia[:self.limite_aminoacidos]:
             if (x + partx) < limx and (y + party) < limy:
-                x = r * cos(theta)
-                y = r * sin(theta)
+                x = int(r * cos(theta))
+                y = int(r * sin(theta))
+                
+                amino = Aminoacido(aminoacido)
+                amino.rect.x = x + partx
+                amino.rect.y = y + party
 
-                am=Aminoacido(self.screen, aminoacido, (x + partx, y + party))
+                self.camino.add(amino)
 
                 r += random()
                 theta += random()
 
-                del am
             else:
                 break
-
+        
+        self.camino.update()
+        self.camino.draw(self.screen)
+        # display.flip()
+                
 
             
 

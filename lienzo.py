@@ -9,13 +9,17 @@ class Lienzo:
         self._display_surf = None
         self.size = self.weight, self.height = 1920, 1080
         self.flor = Flor()
+        # self.fondo = pygame.Surface(self.size)
+        # self.fondo.fill(pygame.Color('lightgrey'))
+        self.clock = pygame.time.Clock()
 
     def save_image(self):
         save(self._display_surf,'flor.png')
 
     def on_init(self):
         pygame.init()
-        self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
+        self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE)
+        self._display_surf.fill(pygame.Color('lightgrey'))
         self._running = True
 
     def on_event(self, event):
@@ -25,10 +29,10 @@ class Lienzo:
             self.save_image()
 
     def on_loop(self):
-        pass
+        self.clock.tick(30)
 
     def on_render(self):
-        self._display_surf.fill(pygame.Color('lightgrey'))
+        # self._display_surf.blit(self.fondo, self.fondo.get_rect())
         self.flor.pintar(self._display_surf)
         pygame.display.update()
 

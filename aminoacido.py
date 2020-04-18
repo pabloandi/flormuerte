@@ -1,34 +1,50 @@
 from pygame.color import Color
-from pygame import freetype
+from pygame.sprite import Sprite
+from pygame.draw import circle as Circle
+from pygame import Surface
 
 
-class Aminoacido:
+
+class Aminoacido(Sprite):
     """Clase Aminoácido para dibujar el color y establecer la letra"""
 
-    def __init__(self, screen, aminoacido, pos):
+    def __init__(self, aminoacido):
         """
         Inicializa la posición, Surface y el aminoacido.
         Los colores de los aminoacidos está basada en la
         siguiente imagen:
         https://www.yourgenome.org/sites/default/files/images/illustrations/codon_wheel_yourgenome.png
 
-        :param screen: pygame.screen.Surface
         :param aminoacido: string
         :param pos: tuple
         """
-        self.screen = screen
-        self.posicion = pos
+        #iniciar clase superior
+        super().__init__()
+
         self.aminoacido = aminoacido
-        
-        self.A = Color('GREEN')
-        self.T = Color('RED')
-        self.G = Color('YELLOW')
-        self.C = Color('BLUE')
-        self.U = Color('ORANGE')
-        self.otro = Color('GREY')
+        self.radio = 20
         self.color = None
+        
+        self.A = Color(0,255,0,20)
+        self.T = Color(255,0,0,20)
+        self.G = Color(255,255,0,20)
+        self.C = Color(0,0,255,20)
+        self.U = Color(255,127,0,20)
+        self.otro = Color(84,84,84,20)
+
         self.setColor(aminoacido)
-        self.draw()
+
+        # crear fondo
+        self.image = Surface((self.radio * 2, self.radio * 2))
+        self.image.set_alpha(50)
+        self.image.fill((0,0,0))
+        self.image.set_colorkey((0,0,0))
+        
+        # dibujar circulo
+        Circle(self.image, self.color, (self.radio, self.radio), self.radio)
+
+        self.rect = self.image.get_rect()
+        
 
     def setColor(self, aminoacido):
         """
@@ -51,14 +67,7 @@ class Aminoacido:
             self.color = self.U
         else:
             self.color = self.otro
-
-    def draw(self):
-        """
-        Inicializa la fuente (por defecto del sistema) y
-        la pinta en el lienzo con la posición, letra y color establecidas
-        :return:
-        """
-        # print(self.posicion)
-        freetype.init()
-        font = freetype.Font(None, 12)
-        font.render_to(surf=self.screen, dest=self.posicion, text=self.aminoacido, fgcolor=self.color)
+        
+        
+        
+        

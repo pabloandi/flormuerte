@@ -12,7 +12,7 @@ class Flor:
         self.pathbacterias = Path("./material/bacteria").resolve()
         self.archivos_secuencias = [archivo for archivo in self.pathvirus.iterdir()] + [archivo for archivo in self.pathbacterias.iterdir()]
         # limitar el número de secuencias con el proposito de optimizacion de recursos de máquina
-        self.limite_secuencias = 100
+        self.limite_secuencias = 2
 
 
     def pintar(self, screen):
