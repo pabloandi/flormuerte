@@ -8,9 +8,6 @@ class Lienzo:
         self._running = True
         self._display_surf = None
         self.size = self.weight, self.height = 1920, 1080
-        self.flor = Flor()
-        # self.fondo = pygame.Surface(self.size)
-        # self.fondo.fill(pygame.Color('lightgrey'))
         self.clock = pygame.time.Clock()
 
     def save_image(self):
@@ -22,6 +19,9 @@ class Lienzo:
         self._display_surf.fill(pygame.Color('lightgrey'))
         self._running = True
 
+        self.flor = Flor(self._display_surf)
+        self.secuencias = self.flor.secuencias
+
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
@@ -32,8 +32,9 @@ class Lienzo:
         self.clock.tick(30)
 
     def on_render(self):
-        # self._display_surf.blit(self.fondo, self.fondo.get_rect())
         self.flor.pintar(self._display_surf)
+        for secuencia in self.secuencias:
+            secuencia.draw(self._display_surf)
         pygame.display.update()
 
     def on_cleanup(self):

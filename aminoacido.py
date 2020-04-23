@@ -22,23 +22,30 @@ class Aminoacido(Sprite):
         super().__init__()
 
         self.aminoacido = aminoacido
-        self.radio = 20
+        self.radio = 10
         self.color = None
         
-        self.A = Color(0,255,0,20)
-        self.T = Color(255,0,0,20)
-        self.G = Color(255,255,0,20)
-        self.C = Color(0,0,255,20)
-        self.U = Color(255,127,0,20)
-        self.otro = Color(84,84,84,20)
+        # self.A = Color(0,255,0,20) #verde
+        # self.T = Color(255,0,0,20) #rojo
+        # self.G = Color(255,255,0,20) #amarillo
+        # self.C = Color(0,0,255,20) #azul
+        # self.U = Color(255,127,0,20) #naranja
+        # self.otro = Color(84,84,84,20) #gris
+
+        self.A = Color(0,255,255) #cyan
+        self.T = Color(255,0,255) #magenta
+        self.G = Color(255,255,0) #amarillo
+        self.C = Color(0,0,0) #negro
+        self.U = Color(255,127,0) #naranja
+        self.otro = Color(84,84,84) #gris
 
         self.setColor(aminoacido)
 
         # crear fondo
         self.image = Surface((self.radio * 2, self.radio * 2))
         self.image.set_alpha(50)
-        self.image.fill((0,0,0))
-        self.image.set_colorkey((0,0,0))
+        self.image.fill((255,255,255))
+        self.image.set_colorkey((255,255,255))
         
         # dibujar circulo
         Circle(self.image, self.color, (self.radio, self.radio), self.radio)

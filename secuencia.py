@@ -14,18 +14,12 @@ class Secuencia:
     https://www.ncbi.nlm.nih.gov/genome/
 
     """
-    def __init__(self, screen, archivo ):
+    def __init__(self, archivo ):
         self.archivo = archivo
         self.secuencia = []
         self.camino = Group()
-        self.screen = screen
-
-        self.limites = screen.get_size()
-        self.limite_aminoacidos = 500
-
+        self.limite_aminoacidos = 500 
         self.leer_archivo()
-        self.crear_camino()
-        
 
     def leer_archivo(self):
         """
@@ -38,13 +32,13 @@ class Secuencia:
         except Exception as e:
             pass
 
-    def crear_camino(self):
+    def crear_camino(self, limites):
         """
         Crea el camino de la secuencia.
         Inicia a partir del tope del tronco de la flor
         :return:
         """
-        limx,limy = self.limites
+        limx,limy = limites
         partx = limx // 2
         party = limy // 2
         x=y=0
@@ -69,9 +63,7 @@ class Secuencia:
             else:
                 break
         
-        self.camino.update()
-        self.camino.draw(self.screen)
-        # display.flip()
+        return self.camino
                 
 
             
