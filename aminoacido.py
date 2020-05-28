@@ -3,9 +3,10 @@ from pygame.sprite import Sprite
 from pygame.draw import circle as Circle
 from pygame import Surface
 
+from base import Base
 
 
-class Aminoacido(Sprite):
+class Aminoacido(Sprite, Base):
     """Clase Aminoácido para dibujar el color y establecer la letra"""
 
     def __init__(self, aminoacido):
@@ -18,19 +19,20 @@ class Aminoacido(Sprite):
         :param aminoacido: string
         :param pos: tuple
         """
-        #iniciar clase superior
-        super().__init__()
+        #iniciar clases superiores
+        Base.__init__(self)
+        Sprite.__init__(self)
 
         self.aminoacido = aminoacido
-        self.radio = 20
+        self.radio = int(self.config['aminoacidos']['radio'])
         self.color = None
         
-        self.A = Color(0,255,0,20)
-        self.T = Color(255,0,0,20)
-        self.G = Color(255,255,0,20)
-        self.C = Color(0,0,255,20)
-        self.U = Color(255,127,0,20)
-        self.otro = Color(84,84,84,20)
+        self.A = Color(0,255,0)
+        self.T = Color(255,0,0)
+        self.G = Color(255,255,0)
+        self.C = Color(0,0,255)
+        self.U = Color(255,127,0)
+        self.otro = Color(84,84,84)
 
         self.setColor(aminoacido)
 

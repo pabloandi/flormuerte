@@ -137,3 +137,4 @@ dmypy.json
 # customize
 arbol.png
 .idea
+config.ini

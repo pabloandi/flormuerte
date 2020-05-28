@@ -1,18 +1,20 @@
 from pathlib import Path
 from secuencia import Secuencia
+from base import Base
 
 import pygame
 
-class Flor:
+class Flor(Base):
     """Lee los archivos de las secuencias de adn y crea ramas con cada uno"""
 
     def __init__(self):
+        super().__init__()
         """Inicializa la flor leyendo las carpetas de las secuencias de virus y bacterias"""
         self.pathvirus = Path("./material/virus").resolve()
         self.pathbacterias = Path("./material/bacteria").resolve()
         self.archivos_secuencias = [archivo for archivo in self.pathvirus.iterdir()] + [archivo for archivo in self.pathbacterias.iterdir()]
         # limitar el número de secuencias con el proposito de optimizacion de recursos de máquina
-        self.limite_secuencias = 2
+        self.limite_secuencias = int(self.config['secuencias']['limite'])
 
 
     def pintar(self, screen):

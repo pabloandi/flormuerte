@@ -5,8 +5,9 @@ from pygame import Surface, Color, display
 from pygame.sprite import Group
 
 from aminoacido import Aminoacido
+from base import Base
 
-class Secuencia:
+class Secuencia(Base):
     """
     Cada secuencia esta asociada a una secuencia de ADN.
     El archivo de la secuencia de ADN está en formato Genbank.
@@ -15,13 +16,16 @@ class Secuencia:
 
     """
     def __init__(self, screen, archivo ):
+        #inicializar clases superiores
+        super().__init__()
+
         self.archivo = archivo
         self.secuencia = []
         self.camino = Group()
         self.screen = screen
 
         self.limites = screen.get_size()
-        self.limite_aminoacidos = 500
+        self.limite_aminoacidos = int(self.config['aminoacidos']['limite'])
 
         self.leer_archivo()
         self.crear_camino()
