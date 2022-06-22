@@ -5,7 +5,7 @@ description = "Proyecto arte generativo hecho con Python, Pygame y Bioseq"
 authors = ["Pablo Diaz <pabloandi@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 pygame = "^1.9.6"
 biopython = "^1.76"
 
